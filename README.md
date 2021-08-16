@@ -1,5 +1,3 @@
-***BLE Client Example Readme***
-
 <b>BLE Client Backgrounder</b>
 
 Bluetooth Low Energy (BLE) is different from Bluetooth Classic (BLC) in a number of ways. Windows support for BLE is such that you can set up a BLC serial port and provided your BLC device is running a serial port acceptor you are golden. BLE is not well supported and, to make things worse, much of the documentation around it appears to be wrong. Microsoft’s own sample project, for example, only works if you “pair” the BLE device, however, you can’t pair a BLE device on Windows 10 so the sample project doesn’t work.
