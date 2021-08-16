@@ -70,20 +70,18 @@ You write to the ESP_WRITE_DATA_UUID and (indirectly) read from ESP_READ_DATA_NO
 
 There are five functions involved.
 
-1) int StartBLEDeviceServices(char* BLEDeviceName,
-uint16_t ServiceUUID, uint16_t WriteUUID, uint16_t ReadUUID,
-uint16_t MaxWait);
-
-returns 0 if successful. 
+1) int StartBLEDeviceServices(char* BLEDeviceName, uint16_t ServiceUUID, uint16_t WriteUUID, uint16_t ReadUUID, uint16_t MaxWait);
+   returns 0 if successful. 
 
 2) bool SendData(uint16_t DestUUID16, uint8_t* data, uint16_t size);
-returns true if successful;
+   returns true if successful;
 
 3) unsigned GetRXData(uint8_t* RXData, unsigned RXMax);
-returns number of bytes received. RX data is copied to a uint8_t array of size RXMax. Note that binary data is exchanged so if you want to print a string you have to zero terminate (or ensure the sender sends the zero).
+   returns number of bytes received. RX data is copied to a uint8_t array of size RXMax. Note that binary data is 
+   exchanged so if you want to print a string you have to zero terminate (or ensure the sender sends the zero).
 
 4) bool CheckActiveBLEConnectionStatus(void);
-returns true if the BLE connection is still active. It takes about 10 seconds for the connection to be lost.
+   returns true if the BLE connection is still active. It takes about 10 seconds for the connection to be lost.
 
 5) unsigned ListDevices(bool show);
-print a list of currently connected BLE devices, service UUIDs, and characteristic UUIDs.
+   print a list of currently connected BLE devices, service UUIDs, and characteristic UUIDs.
