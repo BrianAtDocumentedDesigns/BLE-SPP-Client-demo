@@ -21,14 +21,8 @@ I know I am not a particularly competent c++ programmer, and in particular I kno
 
 
 <b>Known Problems and Limitations:</b> 
-1) I haven’t figured out how to re-attach a BLE device if connection is lost. You need to re-start the code. Since this is intended for debugging purposes it should not be a problem;
-
-2) If you stop and then restart the client quickly, it appears the server (ESP32-C3) still thinks there is a connection and the client won’t connect. Usually it figures it out after a while but if it doesn’t, restart the ESP32 and the client.
-
-I would be delighted if anybody could help me solve these problems, especially the first one, because I think it is related to the second.
 
 The software currently supports only a single BLE device, one read and one write UUID (see below). It should be easy to expand this to mulitple BLE devices and/or mulitple read or write UUIDs, however that was not my requirement.
-
 
 <b><u>BLE Client Outline</b></u>
 
