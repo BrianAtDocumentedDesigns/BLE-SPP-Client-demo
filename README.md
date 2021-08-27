@@ -39,9 +39,13 @@ COMMAND_NOTIFY 0xABF4
 (UUIDs are of the form 0000xxxx-0000-1000-8000-00805f9b34fb where xxxx is the 16 bit UUID)
 
 A scan of the BLE device will report services of
+
 [0] 0x1801 (GenericAttribute)
+
 [1] 0x1800 (GenericAccess)
+
 [2] 0xABF0
+
 The client writes to the DATA_RECEIVE UUID and is notified via the DATA_NOTIFY UUID and the server writes to DATA_NOTIFY and reads from DATA_RECEIVE.
 
 The BLE Client starts up a Windows scanner (ScanForBLE::ScanDevices()) which populates vector<BLEDeviceData> deviceList{} as it discovers nearby BLE devices. The BLE device (i.e. SPP_SERVER) is identified by a unique name (“ESP_SPP_SERVER”) and MAC (which is 98:3b:8f:dd:f4:d1-7c:df:a1:66:a6:3d in my case). Windows refers to this as deviceList.name and deviceList.id. Only unique deviceList.name and deviceList.id combinations are added to deviceList. If there is more than one device with the same name you will have to come up with a way to select which one(s) you want to access. BLE Client assumes only a single BLE device named ESP_SPP_SERVER.
@@ -49,16 +53,26 @@ The BLE Client starts up a Windows scanner (ScanForBLE::ScanDevices()) which pop
 Once a ESP_SPP_SERVER device is discovered, an effort is made to discover the service with UUID 0xABF0 and if that is found the associated characteristics are collected. The UUIDs of the characteristics and their properties will be listed and once this is complete you should be able to read/write the characteristics. 
 
 Properties abbreviations
-B Broadcast
-R Read 
-w WriteWithoutResponse (used by ESP32 SPP Server for writing)
-W Write
-N Notify (used by ESP32 SPP Server for reading)
-I Indicate
-A AuthenticatedSignedWrites
-X ExtendedProperties
-E ReliableWrites
-Z WritableAuxiliaries
+
+    B Broadcast
+
+    R Read 
+
+    w WriteWithoutResponse (used by ESP32 SPP Server for writing)
+
+    W Write
+
+    N Notify (used by ESP32 SPP Server for reading)
+
+    I Indicate
+
+    A AuthenticatedSignedWrites
+
+    X ExtendedProperties
+
+    E ReliableWrites
+
+    Z WritableAuxiliaries
 
 You write to the ESP_WRITE_DATA_UUID and (indirectly) read from ESP_READ_DATA_NOTIFY_UUID. The read function is asynchronous (like an interupt) so the data essentially just appears in a queue called RXDataBuffers. The size of the recieved packets is not restricted but the number of packets in RXDataBuffers is limited to 10 at the moment. 
 
